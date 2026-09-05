@@ -4,12 +4,16 @@
     package = (
       pkgs.emacsWithPackagesFromUsePackage {
         package = pkgs.emacs-pgtk;
-	config = ./init.el;
-	extraEmacsPackages = epkgs: [
+	      config = ./init.el;
+	      extraEmacsPackages = epkgs: [
           epkgs.use-package
         ];
       }
     );
     extraConfig = builtins.readFile ./init.el;
+  };
+
+  home.sessionVariables = {
+    EDITOR = "emacs";
   };
 }
