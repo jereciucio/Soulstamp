@@ -12,6 +12,8 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs;};
+    # Make home-manager continue even if it deletes existing configs
+    backupFileExtension = "backup"; 
   };
   
   hardware.enableRedistributableFirmware = true;
