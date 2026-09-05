@@ -1,4 +1,9 @@
-{lib, inputs, config, ...}: {
+{
+  lib,
+  inputs,
+  config,
+  ...
+}: {
   # Device-independent persistent directories
 
   environment.persistence = {

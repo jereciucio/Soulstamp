@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   users.mutableUsers = false;
   users.users.jeremiasmc = {
     isNormalUser = true;

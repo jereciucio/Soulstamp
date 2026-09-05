@@ -12,7 +12,8 @@
   toSystemdDevice = device:
     lib.concatStringsSep "-" (
       lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" device))
-    ) + ".device";
+    )
+    + ".device";
   wipeScript = ''
     mkdir /tmp -p
     MNTPOINT=$(mktemp -d)
