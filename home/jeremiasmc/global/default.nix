@@ -1,0 +1,33 @@
+{
+  lib,
+  config,
+  outputs,
+  ...
+}: {
+  imports = [
+    ../features/cli
+  ];
+
+  home = {
+    username = "jeremiasmc";
+    homeDirectory = "/home/${config.home.username}";
+    sessionVariables = {
+      NH_FLAKE = "$HOME/Soulstamp";
+    };
+    persistence = {
+      "/bulk-persist" = {
+        hideMounts = true;
+        directories = [
+          "Backups"
+          "Documents"
+          "Downloads"
+          "Pictures"
+          "Projects"
+          "Soulstamp"
+          "Videos"
+        ];
+      };
+    };
+    stateVersion = "26.05";
+  };
+}
