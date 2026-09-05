@@ -1,10 +1,11 @@
 {pkgs, ...}: {
   imports = [
     ./git.nix
+    ./fish.nix
   ];
 
   home.packages = with pkgs; [
-    neovim
+    neovim # Always good to have
     bat # Better `cat`
     fzf # Fuzzy-finder
     tmux # Terminal multiplexor

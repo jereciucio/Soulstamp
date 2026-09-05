@@ -12,7 +12,7 @@
     username = "jeremiasmc";
     homeDirectory = "/home/${config.home.username}";
     sessionVariables = {
-      NH_FLAKE = "$HOME/Soulstamp";
+      NH_FLAKE = "/home/${config.home.username}/Soulstamp";
     };
     persistence = {
       "/bulk-persist" = {
