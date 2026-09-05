@@ -8,6 +8,8 @@
     ./tailscale.nix
   ];
 
+  time.timeZone = "America/Argentina/Buenos_Aires";
+  
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
