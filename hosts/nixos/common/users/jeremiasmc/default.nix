@@ -10,7 +10,14 @@
     extraGroups = [
       "wheel"
     ];
-    initialPassword = "mypassword";
+    hashedPasswordFile = config.sops.secrets.jeremiasmc_passwordhash.path;
+  };
+
+  sops.secrets = {
+    jeremiasmc_passwordhash = {
+      sopsFile = ../../../../secrets.yaml;
+      neededForUsers = true;
+    };
   };
 
   # Import the home-manager config corresponding to the host

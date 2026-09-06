@@ -16,4 +16,6 @@
 
 (use-package magit
   :ensure t)
-(load-theme 'newcomers-presets :no-confirm)
+
+(use-package yaml-mode
+  :ensure t)

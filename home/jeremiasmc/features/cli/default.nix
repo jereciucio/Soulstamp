@@ -2,6 +2,7 @@
   imports = [
     ./git.nix
     ./fish.nix
+    ./gpg.nix
   ];
 
   home.packages = with pkgs; [

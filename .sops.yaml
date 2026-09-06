@@ -1,0 +1,12 @@
+keys:
+  - &users:
+      - &jeremiasmc 810DDD63E1FE28F7C01C1345A6A762F82EC14280
+  - &hosts:
+      - &dalinar age12lt4h6397j2lkadz7ndmnfu60eqtjctq4rwr2wvgzehatgph3d6s6q905t
+creation_rules:
+  - path_regex: hosts/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *dalinar
+        pgp:
+          - *jeremiasmc
