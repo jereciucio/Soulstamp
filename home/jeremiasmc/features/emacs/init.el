@@ -68,6 +68,17 @@
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  :init
+  (setq dashboard-startup-banner 'logo-braille)
+  (setq dashboard-icon-type 'all-the-icons)
+  (setq dashboard-items '((recents . 5)
+			  (projects . 5)
+			  (agenda . 5))))
+
 (use-package org-auto-tangle
   :ensure t
   :hook (org-mode . org-auto-tangle-mode))
