@@ -4,6 +4,7 @@
   home.packages = with pkgs.gnomeExtensions; [
     blur-my-shell
     appindicator
+    caffeine
   ];
   dconf = {
     enable = true;
@@ -12,6 +13,7 @@
         enabled-extensions = with pkgs.gnomeExtensions; [
           blur-my-shell.extensionUuid
           appindicator.extensionUuid
+          caffeine.extensionUuid
         ];
       };   
     };
