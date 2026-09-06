@@ -8,6 +8,10 @@
       };
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
+      signing = {
+        format = "openpgp";
+        signByDefault = true;
+      };
     };
   };
 }
