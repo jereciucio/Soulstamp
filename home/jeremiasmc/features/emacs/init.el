@@ -56,6 +56,13 @@
   :hook
   (text-mode . diff-hl-mode))
 
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
 (setq inhibit-startup-message t)
 
 (menu-bar-mode -1)

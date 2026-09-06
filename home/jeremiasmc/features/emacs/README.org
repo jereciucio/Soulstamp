@@ -149,6 +149,18 @@ on its left
     :hook
     (text-mode . diff-hl-mode))
 #+end_src
+** Project Management (=projectile=)
+Projectile is a package that detects project roots (like .git or
+Makefile) to give you project-wide file navigation, search, and
+build/test commands without navigating subdirectories.
+#+begin_src elisp
+  (use-package projectile
+    :ensure t
+    :init
+    (projectile-mode +1)
+    :bind-keymap
+    ("C-c p" . projectile-command-map))
+#+end_src
 
 * UI
 ** Basic UI Tweaks
