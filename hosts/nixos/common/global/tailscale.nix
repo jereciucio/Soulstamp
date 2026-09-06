@@ -1,4 +1,8 @@
-{lib, config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   services.tailscale = {
     enable = true;
 
@@ -7,7 +11,6 @@
 
     # Autologin when setting up a new host
     authKeyFile = config.sops.secrets.tailscale_authkey.path;
-    
   };
 
   sops.secrets = {
@@ -15,7 +18,7 @@
       sopsFile = ../../../secrets.yaml;
     };
   };
-  
+
   # Easier NAT traversal when possible
   networking.firewall.allowedUDPPorts = [41641];
 
