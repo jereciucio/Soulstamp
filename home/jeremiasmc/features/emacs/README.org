@@ -1,0 +1,200 @@
+#+title: Jere's Emacs Config
+#+author: Jeremías Agustín Martinez Ciucio
+#+property: header-args :tangle init.el :autogobble:
+#+auto_tangle: t
+
+* About this document
+This is my [[https://en.wikipedia.org/wiki/Literate_programming][Literate Emacs Config]], done entirely with Org-Mode, a kind
+of markup language that lets you embed source code between your prose
+and then exporting it all to a code-only file.
+
+Because /Emacs/ is configured using code, writing it in this way
+allows me to organize and document my configuration in an easy and
+practical way. This avoids situations like "Where did I set variable
+/x/?", "What does this /y/ code do?", "Why did I use choose package
+/w/ over /z/?", because code and its documentation are fundamentally
+coupled.
+
+This way, I can also use all Org-Mode features like header folding,
+task and time tracking, and quickly exporting to a LOT of formats
+(HTML, LaTeX, PDF, etc.)
+
+* Important note
+Because my system is configured using nix, I auto-install my Emacs
+packages with it, detecting them from the =use-package= blocks in my
+config. This makes iterating on my config a little less practical,
+because I have to rebuild my system every time I change it, but it
+greatly improves its reproductibility and ease of integration with the
+rest of the Nix ecosystem.
+
+This means that I don't have any Emacs package manager declared in my
+config, so be aware it probably won't work out of the box if it is
+imported outside of Nix.
+
+* Completion
+** Completion Engine (=vertico=)
+Vertico provides a much more complete completion system than the
+defaul Emacs one. It is similar to other completion systems, like
+=helm= or =ivy=, with the difference being that it just extends the
+default system instead of replacing it. This way, it remains
+compatible with absolutely everything. In contrast, the other options
+require packages to take them into account, reducing their
+compatibility.
+
+It is also very minimal by default, so we can extend it with other
+packages
+#+begin_src elisp
+  (use-package vertico
+    :ensure t
+    :init
+    (vertico-mode)
+    (savehist-mode 1))
+#+end_src
+*** Marginalia in completion buffers (=marginalia=)
+We will use Marginalia, which adds useful info to the completion
+buffer entries
+#+begin_src elisp
+  (use-package marginalia
+    :ensure t
+    :init
+    (marginalia-mode))
+#+end_src
+*** Better matching (=orderless=)
+Matches search term fuzzily instead of literally
+#+begin_src elisp
+  (use-package orderless
+    :ensure t
+    :custom
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
+    ;; (orderless-component-separator #'orderless-escapable-split-on-space)
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles partial-completion))))
+    (completion-category-defaults nil) ;; Disable defaults, use our settings
+    (completion-pcm-leading-wildcard t) ;; Emacs 31: partial-completion behaves like substring
+    )
+#+end_src
+*** Icons (=all-the-icons-completion=)
+#+begin_src elisp
+  (use-package all-the-icons-completion
+    :ensure t
+    :after all-the-icons
+    :init
+    (all-the-icons-completion-mode 1)
+    )
+  (use-package all-the-icons
+    :ensure t)
+#+end_src
+* Editor
+** EditorConfig (=editorconfig=)
+EditorConfig is a standard that lets us mantain some shared coding
+configs between editors and IDEs via a file called =.editorconfig= on
+the root of our project. Emacs supports this standard by default, so
+we just have to enable it
+#+begin_src elisp
+  (editorconfig-mode 1)
+#+end_src
+** Auto-pairs (=smartparens=)
+Use =smartparens= for awesome symbol pairings
+#+begin_src elisp
+    (use-package smartparens
+      :ensure t
+      :config
+      (require 'smartparens-config)
+      :hook (prog-mode . smartparens-mode))
+#+end_src
+** Trim whitespace (=ws-butler=)
+Trim trailing whitespace on save only on edited lines
+#+begin_src elisp
+  (use-package ws-butler
+    :ensure t
+    :hook (prog-mode . ws-butler-mode))
+#+end_src
+
+* Tools
+** Git (=magit=)
+#+begin_quote
+It's Magit! A Git Porcelain inside Emacs
+#+end_quote
+Magit is a Git interface for Emacs. It is highly regarded as simply
+/the best/ Git interface, period. It allows you do everything you can
+from the Git CLI, but with a pretty GUI with mnemonic key presses.
+
+Magit needs the package =transient= as a dependency, so we install it
+first
+#+begin_src elisp
+    (use-package transient
+      :ensure t)
+#+end_src
+
+Then, we simply install Magit
+#+begin_src elisp
+    (use-package magit
+      :ensure t
+      :after transient)
+#+end_src
+
+Finally, we load the recommended Magit keybindings. They aren't loaded
+by default because the =C-c <LETTER>= prefix is reserved for
+user-defined keybindings.
+#+begin_src elisp
+  (setq magit-define-global-key-bindings 'recommended)
+#+end_src
+** Hightlight Git Diffs (=diff-hl=)
+=diff-hl= indicates the git status of uncommited changes it with colour
+on its left
+#+begin_src elisp
+  (use-package diff-hl
+    :ensure t
+    :hook
+    (text-mode . diff-hl-mode))
+#+end_src
+
+* UI
+** Basic UI Tweaks
+By default, Emacs shows a splash screen with a welcome message and
+some info. It looks kinda dated and boring, so we'll remove it.
+#+begin_src elisp
+  (setq inhibit-startup-message t)
+#+end_src
+We will also remove the menu, tool and scroll bars, as we can do
+everything just by keyboard, and they use up our valuable screen real
+estate.
+#+begin_src elisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+We will also activate line numbers on most programming buffers (we
+don't want them in "text" buffers like Org-mode ones)
+#+begin_src elisp
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+#+end_src
+** Colored Pairs (=rainbow-delimiters=)
+A minor mode that colours parenthesis, brackets and braces depending
+on their depth, making it easier to see how they correspond with each
+other
+#+begin_src elisp
+      (use-package rainbow-delimiters
+        :ensure t
+        :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+* Org
+** Auto-tangle
+We'll use the =org-auto-tangle= package, that automatically tangles
+all org files with the option =#+auto_tangle: t= set (like this one).
+#+begin_src elisp
+  (use-package org-auto-tangle
+    :ensure t
+    :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+
+* Nix
+We'll add modes for common files on my Nix config
+#+begin_src elisp
+  (use-package nix-mode
+    :ensure t)
+  (use-package yaml-mode
+    :ensure t)
+#+end_src

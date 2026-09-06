@@ -20,4 +20,8 @@
   home.sessionVariables = {
     EDITOR = "emacs";
   };
+
+  home.packages = [
+    pkgs.emacs-all-the-icons-fonts # Required by the Emacs config
+  ];
 }
