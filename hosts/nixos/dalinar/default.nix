@@ -15,6 +15,7 @@
     hostName = "dalinar";
     networkmanager.enable = true;
   };
-
+  powerManagement.powertop.enable = true;
+  services.thermald.enable = true;
   system.stateVersion = "26.05";
 }
