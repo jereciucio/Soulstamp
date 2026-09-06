@@ -170,6 +170,16 @@ don't want them in "text" buffers like Org-mode ones)
 #+begin_src elisp
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 #+end_src
+
+*** Which-key (=which-key=)
+Which-key pops up when we start a key chord, essential for people like
+me, who often forget keybindings
+#+begin_src elisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode 1))
+#+end_src
 ** Colored Pairs (=rainbow-delimiters=)
 A minor mode that colours parenthesis, brackets and braces depending
 on their depth, making it easier to see how they correspond with each

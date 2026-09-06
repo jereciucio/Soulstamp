@@ -64,6 +64,11 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode 1))
+
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
