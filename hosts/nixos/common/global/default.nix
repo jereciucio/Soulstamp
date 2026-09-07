@@ -13,6 +13,12 @@
 
   time.timeZone = "America/Argentina/Buenos_Aires";
 
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "altgr-intl";
+    options = "ctrl:nocaps";
+  };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
