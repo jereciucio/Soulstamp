@@ -169,7 +169,9 @@ allowing things like annotations.
   (use-package pdf-tools
     :ensure t
     :init
-    (pdf-tools-install))
+    (pdf-tools-install)
+    :hook
+    (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
 #+end_src
 
 * UI

@@ -66,7 +66,9 @@
 (use-package pdf-tools
   :ensure t
   :init
-  (pdf-tools-install))
+  (pdf-tools-install)
+  :hook
+  (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
 
 (setq inhibit-startup-message t)
 
