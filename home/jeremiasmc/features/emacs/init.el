@@ -98,6 +98,11 @@
 			  (projects . 5)
 			  (agenda . 5))))
 
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1))
+
 (use-package org-auto-tangle
   :ensure t
   :hook (org-mode . org-auto-tangle-mode))

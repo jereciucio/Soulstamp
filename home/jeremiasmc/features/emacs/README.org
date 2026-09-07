@@ -231,6 +231,14 @@ to recent files, projects, agenda, etcetera.
   			  (projects . 5)
   			  (agenda . 5))))
 #+end_src
+** Modeline (=doom-modeline=)
+A modern and powerful modeline
+#+begin_src elisp
+  (use-package doom-modeline
+    :ensure t
+    :init
+    (doom-modeline-mode 1))
+#+end_src
 
 * Org
 ** Auto-tangle
