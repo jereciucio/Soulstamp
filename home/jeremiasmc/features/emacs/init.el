@@ -98,6 +98,13 @@
 			  (projects . 5)
 			  (agenda . 5))))
 
+(use-package nyan-mode
+  :ensure t
+  :init
+  (nyan-mode 1)
+  (nyan-start-animation)
+  (nyan-toggle-wavy-trail))
+
 (use-package doom-modeline
   :ensure t
   :init
