@@ -161,6 +161,16 @@ build/test commands without navigating subdirectories.
     :bind-keymap
     ("C-c p" . projectile-command-map))
 #+end_src
+** PDF Files (=pdf-tools=)
+PDF Tools is a replacement for Emacs' native DocView. It live-renders
+the PDFs instead of pre-rendering images, making it more flexible and
+allowing things like annotations.
+#+begin_src elisp
+  (use-package pdf-tools
+    :ensure t
+    :init
+    (pdf-tools-install))
+#+end_src
 
 * UI
 ** Basic UI Tweaks

@@ -63,6 +63,11 @@
   :bind-keymap
   ("C-c p" . projectile-command-map))
 
+(use-package pdf-tools
+  :ensure t
+  :init
+  (pdf-tools-install))
+
 (setq inhibit-startup-message t)
 
 (menu-bar-mode -1)
