@@ -127,7 +127,11 @@
   :ensure t)
 
 (use-package auctex
-  :ensure t)
+  :ensure t
+  :init
+  (setq TeX-engine 'luatex)
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+	TeX-source-correlate-start-server t))
 
 (use-package cdlatex
   :ensure t)

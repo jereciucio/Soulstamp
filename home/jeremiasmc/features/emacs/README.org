@@ -287,7 +287,11 @@ We'll add modes for common files on my Nix config
 *** Better LaTeX editing (=AUCTeX=)
 #+begin_src elisp
   (use-package auctex
-    :ensure t)
+    :ensure t
+    :init
+    (setq TeX-engine 'luatex)
+    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+  	TeX-source-correlate-start-server t))
 #+end_src
 *** Fast math insertion (=CDLaTeX=)
 #+begin_src elisp
