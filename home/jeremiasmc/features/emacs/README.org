@@ -189,6 +189,15 @@ Here we configure the font to use. I like using JetBrains Mono
   (set-face-attribute 'default nil :font "JetBrains Mono Nerd Font-11")
 #+end_src
 
+*** Theme (=doom-themes=)
+doom-themes is a pretty big collection of beautiful themes
+#+begin_src elisp
+  (use-package doom-themes
+    :ensure t
+    :config
+    (load-theme 'doom-one-light t))
+#+end_src
+
 *** Which-key (=which-key=)
 Which-key pops up when we start a key chord, essential for people like
 me, who often forget keybindings

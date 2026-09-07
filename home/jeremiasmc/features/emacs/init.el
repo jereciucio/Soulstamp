@@ -72,6 +72,12 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 (set-face-attribute 'default nil :font "JetBrains Mono Nerd Font-11")
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one-light t))
+
 (use-package which-key
   :ensure t
   :init
