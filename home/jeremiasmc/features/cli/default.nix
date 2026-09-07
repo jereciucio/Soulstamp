@@ -13,5 +13,7 @@
     tmux # Terminal multiplexor
     btop # Task-manager
     nh # Wrapper for NixOS commands
+    ripgrep # Faster grep
+    fd # Faster find
   ];
 }
