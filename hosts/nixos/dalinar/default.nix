@@ -9,11 +9,11 @@
     ../common/global
     ../common/users/jeremiasmc
     ../common/optional/gnome.nix
+    ../common/optional/wireless.nix
   ];
 
   networking = {
     hostName = "dalinar";
-    networkmanager.enable = true;
   };
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
