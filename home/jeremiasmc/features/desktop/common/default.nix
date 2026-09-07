@@ -3,6 +3,7 @@
     ./zen-browser.nix
     ./feishin.nix
     ./nextcloud.nix
+    ./texlive.nix
   ];
 
   home.persistence = {
