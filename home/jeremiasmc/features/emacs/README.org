@@ -183,6 +183,12 @@ don't want them in "text" buffers like Org-mode ones)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 #+end_src
 
+*** Font
+Here we configure the font to use. I like using JetBrains Mono
+#+begin_src elisp
+  (set-face-attribute 'default nil :font "JetBrains Mono Nerd Font-11")
+#+end_src
+
 *** Which-key (=which-key=)
 Which-key pops up when we start a key chord, essential for people like
 me, who often forget keybindings

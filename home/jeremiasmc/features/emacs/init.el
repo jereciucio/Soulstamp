@@ -71,6 +71,7 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
+(set-face-attribute 'default nil :font "JetBrains Mono Nerd Font-11")
 (use-package which-key
   :ensure t
   :init
