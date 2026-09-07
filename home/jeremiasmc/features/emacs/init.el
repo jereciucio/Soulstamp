@@ -125,3 +125,9 @@
   :ensure t)
 (use-package yaml-mode
   :ensure t)
+
+(use-package auctex
+  :ensure t)
+
+(use-package cdlatex
+  :ensure t)

@@ -262,8 +262,10 @@ A modern and powerful modeline
     (doom-modeline-mode 1))
 #+end_src
 
-* Org
-** Auto-tangle
+* Languages
+
+** Org
+*** Auto-tangle
 We'll use the =org-auto-tangle= package, that automatically tangles
 all org files with the option =#+auto_tangle: t= set (like this one).
 #+begin_src elisp
@@ -272,11 +274,23 @@ all org files with the option =#+auto_tangle: t= set (like this one).
     :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
-* Nix
+** Nix
 We'll add modes for common files on my Nix config
 #+begin_src elisp
   (use-package nix-mode
     :ensure t)
   (use-package yaml-mode
+    :ensure t)
+#+end_src
+
+** LaTeX
+*** Better LaTeX editing (=AUCTeX=)
+#+begin_src elisp
+  (use-package auctex
+    :ensure t)
+#+end_src
+*** Fast math insertion (=CDLaTeX=)
+#+begin_src elisp
+  (use-package cdlatex
     :ensure t)
 #+end_src
