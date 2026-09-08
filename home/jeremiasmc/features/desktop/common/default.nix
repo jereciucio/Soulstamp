@@ -5,6 +5,7 @@
     ./nextcloud.nix
     ./texlive.nix
     ./telegram.nix
+    ./whatsie.nix
   ];
 
   home.persistence = {
