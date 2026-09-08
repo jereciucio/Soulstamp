@@ -25,4 +25,13 @@
       ".local/share/keyrings"
     ];
   };
+
+  # Add the 'gnome-initial-setup-done' file so GNOME doesn't show tour
+  # on every boot
+  xdg.configFile = {
+    "gnome-initial-setup-done" = {
+      enable = true;
+      text = "yes";
+    };
+  };
 }
