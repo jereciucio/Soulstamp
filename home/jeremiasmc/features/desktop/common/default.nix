@@ -4,6 +4,7 @@
     ./feishin.nix
     ./nextcloud.nix
     ./texlive.nix
+    ./telegram.nix
   ];
 
   home.persistence = {
