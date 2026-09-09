@@ -1,5 +1,5 @@
 {pkgs, ...}: {
   home.packages = [
-    pkgs.texliveFull
+    (pkgs.texliveFull.overrideAttrs {withDocs = true;})
   ];
 }
