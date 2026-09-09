@@ -138,3 +138,6 @@
 
 (use-package cdlatex
   :ensure t)
+
+(use-package haskell-mode
+  :ensure t)

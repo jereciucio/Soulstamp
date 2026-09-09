@@ -306,3 +306,10 @@ We'll add modes for common files on my Nix config
   (use-package cdlatex
     :ensure t)
 #+end_src
+
+** Haskell
+We use the =haskell-mode= major mode
+#+begin_src elisp
+  (use-package haskell-mode
+    :ensure t)
+#+end_src
