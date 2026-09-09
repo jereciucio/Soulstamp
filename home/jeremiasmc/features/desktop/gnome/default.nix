@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-
   # Install GNOME Extensions
   home.packages = with pkgs.gnomeExtensions; [
     blur-my-shell
@@ -15,7 +14,7 @@
           appindicator.extensionUuid
           caffeine.extensionUuid
         ];
-      };   
+      };
     };
   };
 
