@@ -70,6 +70,9 @@
   :hook
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
 
+(use-package vterm
+  :ensure t)
+
 (setq inhibit-startup-message t)
 
 (menu-bar-mode -1)
