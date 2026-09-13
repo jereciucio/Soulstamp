@@ -6,6 +6,7 @@
     ./texlive.nix
     ./telegram.nix
     ./whatsie.nix
+    ./discord.nix
   ];
 
   home.persistence = {
