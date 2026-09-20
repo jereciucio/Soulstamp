@@ -15,8 +15,6 @@
 
   services.xserver.xkb = {
     layout = "us";
-    variant = "altgr-intl";
-    options = "ctrl:nocaps";
   };
 
   home-manager = {
