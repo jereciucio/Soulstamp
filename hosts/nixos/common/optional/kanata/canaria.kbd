@@ -1,0 +1,69 @@
+(defvar
+    left-hand-keys (w l y p k
+		    c r s t b
+		    x v d g q
+		    )
+  right-hand-keys ( z j o u ;
+		    f n e i a
+		    m h / , .
+		    )
+  )
+
+(defvar
+    tap-time 200
+    hold-time 250
+  )
+
+(defalias
+    ;; Home-row mods
+    c (tap-hold-release-keys $tap-time $hold-time c lmet $left-hand-keys)
+    r (tap-hold-release-keys $tap-time $hold-time r lalt $left-hand-keys)
+    s (tap-hold-release-keys $tap-time $hold-time s lctl $left-hand-keys)
+    t (tap-hold-release-keys $tap-time $hold-time t lsft $left-hand-keys)
+
+    n (tap-hold-release-keys $tap-time $hold-time n lsft $right-hand-keys)
+    e (tap-hold-release-keys $tap-time $hold-time e lctl $right-hand-keys)
+    i (tap-hold-release-keys $tap-time $hold-time i lalt $right-hand-keys)
+    a (tap-hold-release-keys $tap-time $hold-time a lmet $right-hand-keys)
+
+    ;; Switch layers holding grave
+    grv (tap-hold $tap-time $hold-time grv (layer-while-held switch))
+    can (layer-switch canaria)
+    qwe (layer-switch qwerty)
+    )
+
+
+
+(defsrc
+  grv 1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab q w e r t y u i o p [ ] \
+  caps a s d f g h j k l ; ' ret
+  lsft z x c v b n m , . / rsft
+  lctl lmet lalt spc ralt rmet rctl
+)
+
+(deflayer canaria
+  @grv 1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab w l y p k z j o u ; [ ] \
+  caps @c @r @s @t b f @n @e @i @a ' ret
+  lsft x v d g q m h / , . rsft
+  lctl lmet lalt spc ralt rmet rctl
+  )
+
+
+(deflayer qwerty
+  grv 1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab q w e r t y u i o p [ ] \
+  caps a s d f g h j k l ; ' ret
+  lsft z x c v b n m , . / rsft
+  lctl lmet lalt spc ralt rmet rctl
+  )
+
+
+(deflayer switch
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ @can @qwe _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _
+  )

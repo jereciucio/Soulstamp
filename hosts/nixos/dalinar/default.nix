@@ -10,6 +10,7 @@
     ../common/users/jeremiasmc
     ../common/optional/gnome.nix
     ../common/optional/wireless.nix
+    ../common/optional/kanata
   ];
 
   networking = {
