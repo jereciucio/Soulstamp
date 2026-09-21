@@ -18,6 +18,13 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  # Fix Bluetooth driver failing to exit LPS state, causing
+  # intermittent audio issues
+  boot.extraModprobeConfig = ''
+  options rtw88_core disable_lps_deep=y
+  options rtw88_pci disable_aspm=y
+  '';
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
