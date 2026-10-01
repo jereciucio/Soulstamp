@@ -10,24 +10,32 @@
   )
 
 (defvar
-    tap-time 200
-    hold-time 250
+    hold-time 200
+    tap-time 150
+    hold-time-long 300
   )
 
 (defalias
     ;; Home-row mods
-    c (tap-hold-release-keys $tap-time $hold-time c lmet $left-hand-keys)
+    c (tap-hold-release-keys $tap-time $hold-time-long c lmet $left-hand-keys)
     r (tap-hold-release-keys $tap-time $hold-time r lalt $left-hand-keys)
     s (tap-hold-release-keys $tap-time $hold-time s lctl $left-hand-keys)
     t (tap-hold-release-keys $tap-time $hold-time t lsft $left-hand-keys)
 
+    ;; I'm using English Alt-Gr intl as the 'base' layout in my system
+    ;; So having Alt-Gr near my left-hand homerow is pretty handy for
+    ;; typing out accented vowels and ñ, which are all on my right
+    ;; hand
+    v (tap-hold-release-keys $tap-time $hold-time-long v ralt $left-hand-keys)
+
     n (tap-hold-release-keys $tap-time $hold-time n lsft $right-hand-keys)
     e (tap-hold-release-keys $tap-time $hold-time e lctl $right-hand-keys)
     i (tap-hold-release-keys $tap-time $hold-time i lalt $right-hand-keys)
-    a (tap-hold-release-keys $tap-time $hold-time a lmet $right-hand-keys)
+    a (tap-hold-release-keys $tap-time $hold-time-long a lmet $right-hand-keys)
 
     ;; Switch layers holding grave
     grv (tap-hold $tap-time $hold-time grv (layer-while-held switch))
+    spc (tap-hold $tap-time $hold-time spc (layer-while-held symnum))
     can (layer-switch canaria)
     qwe (layer-switch qwerty)
     )
@@ -46,10 +54,17 @@
   @grv 1 2 3 4 5 6 7 8 9 0 - = bspc
   tab w l y p k z j o u ; [ ] \
   bspc @c @r @s @t b f @n @e @i @a ' ret
-  lsft x v d g q m h / , . rsft
-  lctl lmet lalt spc ralt rmet rctl
+  lsft x @v d g q m h / , . rsft
+  lctl lmet lalt @spc ralt rmet rctl
   )
 
+(deflayer symnum
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ S-. S-0 ] S-] \ S-= 7 8 9 S-8 _ _ _
+  _ S-, S-9 [ S-[ = - 4 5 6 / _ _
+  _ S-1 S-3 ; S-; S-7 0 1 2 3 _ _
+  _ _ _ _ _ _ _
+  )
 
 (deflayer qwerty
   @grv 1 2 3 4 5 6 7 8 9 0 - = bspc
@@ -59,7 +74,6 @@
   lctl lmet lalt spc ralt rmet rctl
   )
 
-
 (deflayer switch
   _ _ _ _ _ _ _ _ _ _ _ _ _ _
   _ @can @qwe _ _ _ _ _ _ _ _ _ _ _
@@ -67,3 +81,4 @@
   _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _
   )
+
