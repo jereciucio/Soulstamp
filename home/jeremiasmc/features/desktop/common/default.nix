@@ -7,6 +7,7 @@
     ./telegram.nix
     ./whatsie.nix
     ./discord.nix
+    ./brave-origin.nix
   ];
 
   home.persistence = {
