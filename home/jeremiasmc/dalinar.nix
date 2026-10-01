@@ -4,5 +4,6 @@
     ./features/emacs
     ./features/desktop/common
     ./features/desktop/gnome
+    ./features/gaming/nethack.nix
   ];
 }
