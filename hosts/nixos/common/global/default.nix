@@ -33,6 +33,7 @@
     };
     overlays = [
       inputs.emacs-overlay.overlays.default
+      inputs.self.overlays.additions
     ];
   };
 }

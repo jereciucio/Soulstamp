@@ -45,6 +45,8 @@
   in {
     # Formatter for nixlang files. use with `nix fmt filename.nix`
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    packages = forAllSystems (pkgs: import ./pkgs {inherit inputs pkgs;});
+    overlays = import ./overlays {inherit inputs;};
 
     # NixOS host configurations
     nixosConfigurations = {
