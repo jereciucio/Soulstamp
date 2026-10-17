@@ -26,7 +26,7 @@
     ;; So having Alt-Gr near my left-hand homerow is pretty handy for
     ;; typing out accented vowels and ñ, which are all on my right
     ;; hand
-    v (tap-hold-release-keys $tap-time $hold-time-long v ralt $left-hand-keys)
+    v (tap-hold-release-keys $tap-time $hold-time v ralt $left-hand-keys)
 
     n (tap-hold-release-keys $tap-time $hold-time n lsft $right-hand-keys)
     e (tap-hold-release-keys $tap-time $hold-time e lctl $right-hand-keys)
