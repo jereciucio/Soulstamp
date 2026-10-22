@@ -17,6 +17,7 @@
     hostName = "dalinar";
   };
   powerManagement.powertop.enable = true;
+  services.printing.enable = true;
   services.thermald.enable = true;
   system.stateVersion = "26.05";
 }
