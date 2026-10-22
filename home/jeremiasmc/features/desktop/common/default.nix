@@ -8,6 +8,7 @@
     ./whatsie.nix
     ./discord.nix
     ./brave-origin.nix
+    ./libreoffice.nix
   ];
 
   home.persistence = {
