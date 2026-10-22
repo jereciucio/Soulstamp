@@ -9,6 +9,7 @@
     ./discord.nix
     ./brave-origin.nix
     ./libreoffice.nix
+    ./inkscape.nix
   ];
 
   home.persistence = {
