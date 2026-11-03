@@ -6,5 +6,6 @@
     ./features/desktop/gnome
     ./features/gaming/nethack.nix
     ./features/gaming/go.nix
+    ./features/development/node.nix
   ];
 }
