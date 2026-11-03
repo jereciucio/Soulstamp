@@ -3,7 +3,7 @@
     enable = true;
 
     keyboards.kbd = {
-      config = (builtins.readFile ./canaria.kbd);
+      config = (builtins.readFile ./canary.kbd);
     };
   };
 }

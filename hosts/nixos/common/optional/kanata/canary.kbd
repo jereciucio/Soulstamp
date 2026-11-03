@@ -1,11 +1,11 @@
 (defvar
     left-hand-keys (w l y p k
 		    c r s t b
-		    x v d g q
+		    j v d g q
 		    )
-  right-hand-keys ( z j o u ;
+  right-hand-keys ( z x o u ;
 		    f n e i a
-		    m h / , .
+		    m h , . /
 		    )
   )
 
@@ -36,7 +36,7 @@
     ;; Switch layers holding grave
     grv (tap-hold $tap-time $hold-time grv (layer-while-held switch))
     spc (tap-hold $tap-time $hold-time spc (layer-while-held symnum))
-    can (layer-switch canaria)
+    can (layer-switch canary)
     qwe (layer-switch qwerty)
     )
 
@@ -50,11 +50,11 @@
   lctl lmet lalt spc ralt rmet rctl
 )
 
-(deflayer canaria
+(deflayer canary
   @grv 1 2 3 4 5 6 7 8 9 0 - = bspc
-  tab w l y p k z j o u ; [ ] \
+  tab w l y p k z x o u ; [ ] \
   bspc @c @r @s @t b f @n @e @i @a ' ret
-  lsft x @v d g q m h / , . rsft
+  lsft j @v d g q m h , . / rsft
   lctl lmet lalt @spc ralt rmet rctl
   )
 
