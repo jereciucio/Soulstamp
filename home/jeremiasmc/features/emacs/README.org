@@ -434,3 +434,16 @@ We use the =haskell-mode= major mode
   (use-package haskell-mode
     :ensure t)
 #+end_src
+
+** JavaScript
+The built-in =js-mode= is enough here. If the tree-sitter grammar is
+available, =js-ts-mode= is usually faster to fontify larger files, but
+the settings above are what matter for typing responsiveness.
+#+begin_src elisp
+  ;; `js-mode' is built in, so plain hooks are simpler here.  (Using
+  ;; `use-package' with :ensure nil made it generate bogus autoloads that
+  ;; pointed at a non-existent "js-mode" library.)
+  (add-hook 'js-mode-hook #'subword-mode)
+  (add-hook 'js-mode-hook #'eglot-ensure)
+  (add-hook 'js-mode-hook #'completion-preview-mode)
+#+end_src

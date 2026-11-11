@@ -3,5 +3,7 @@
     nodejs_26
     curl
     jq
+    typescript-language-server
+    eslint
   ];
 }

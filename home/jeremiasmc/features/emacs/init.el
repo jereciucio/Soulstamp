@@ -208,3 +208,10 @@
 
 (use-package haskell-mode
   :ensure t)
+
+;; `js-mode' is built in, so plain hooks are simpler here.  (Using
+;; `use-package' with :ensure nil made it generate bogus autoloads that
+;; pointed at a non-existent "js-mode" library.)
+(add-hook 'js-mode-hook #'subword-mode)
+(add-hook 'js-mode-hook #'eglot-ensure)
+(add-hook 'js-mode-hook #'completion-preview-mode)
