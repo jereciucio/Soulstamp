@@ -35,12 +35,10 @@
   '';
 
   rootDeviceUnit = toSystemdDevice root.device;
-  phase1Systemd = config.boot.initrd.systemd.enable;
 in {
   boot.initrd = {
     supportedFilesystems = ["btrfs"];
-    postDeviceCommands = lib.mkIf (!phase1Systemd) (lib.mkBefore wipeScript);
-    systemd.services.restore-root = lib.mkIf phase1Systemd {
+    systemd.services.restore-root =  {
       description = "Rollback btrfs rootfs";
       wantedBy = ["initrd.target"];
       requires = [rootDeviceUnit];
