@@ -39,6 +39,18 @@ makes closures work as expected, so enable it for the generated file.
   ;; -*- lexical-binding: t; -*-
 #+end_src
 
+* Performance
+Emacs talks to language servers over a subprocess pipe, and its defaults
+are tuned for conservatism rather than for large LSP messages. Reading
+bigger chunks and running garbage collection less often makes a
+noticeable difference when a server is chatty.
+#+begin_src elisp
+  ;; Read larger chunks from language servers (default is 64 KiB).
+  (setq read-process-output-max (* 1024 1024))
+  ;; Avoid frequent full garbage collections while editing.
+  (setq gc-cons-threshold (* 64 1024 1024))
+#+end_src
+
 * Keeping the filesystem tidy
 By default, Emacs writes auto-save files (=#file#=), lock files (=.#file=)
 and backups (=file~=) right next to the files we edit. This clutters
@@ -122,6 +134,77 @@ Matches search term fuzzily instead of literally
     )
   (use-package all-the-icons
     :ensure t)
+#+end_src
+** LSP (=eglot=)
+Eglot is Emacs' built-in LSP client. Let's enable it
+#+begin_src elisp
+  (use-package eglot
+    :ensure t
+    :custom
+    ;; Let edits settle before notifying the server. This coalesces bursts
+    ;; of typing into fewer didChange messages.
+    (eglot-send-changes-idle-time 1.0)
+    ;; Don't freeze the UI while the server starts up.
+    (eglot-sync-connect nil)
+    ;; Free server resources when the last buffer using it is closed.
+    (eglot-autoshutdown t)
+    ;; The event log is only useful for debugging; keeping every message
+    ;; around costs memory and CPU.
+    (eglot-events-buffer-config '(:size 0 :format full)))
+#+end_src
+** Drop-down completions (=corfu=)
+Automatic completion is the other half of the typing-latency problem:
+every trigger asks Eglot for completions. A short prefix means that
+request happens constantly, so we use Corfu's recommended minimum of
+three characters and give it a small delay.
+#+begin_src elisp
+  (use-package corfu
+    :ensure t
+    :init
+    (setq corfu-auto t
+          corfu-auto-prefix 3
+          corfu-auto-delay 0.3)
+    (global-corfu-mode 1))
+#+end_src
+*** Inline completion preview (=completion-preview=)
+=completion-preview-mode= runs the same completion functions as Corfu.
+With its default idle delay of =nil= it does so immediately after every
+inserted character (that is, on every keystroke), which is especially
+expensive in front of an LSP server. Make it wait until we actually
+pause.
+#+begin_src elisp
+  (setq completion-preview-idle-delay 0.5)
+#+end_src
+*** More completion at point (=cape=)
+=cape-dabbrev= and =cape-file= are useful, but putting them on the
+/global/ =completion-at-point-functions= makes every completion attempt
+in every buffer pay for them. Add them buffer-locally only where they
+are actually wanted; Eglot already provides the useful completions in
+programming buffers.
+#+begin_src elisp
+  (use-package cape
+    :ensure t
+    :init
+    ;; `cape-dabbrev' scans buffer text and can be expensive, so keep it
+    ;; for prose buffers.
+    (add-hook 'text-mode-hook
+              (lambda ()
+                (add-hook 'completion-at-point-functions #'cape-dabbrev nil t)))
+    ;; File-name completion is cheap and useful in programming buffers.
+    (add-hook 'prog-mode-hook
+              (lambda ()
+                (add-hook 'completion-at-point-functions #'cape-file nil t))))
+#+end_src
+** Syntax checking (=flycheck=)
+Eglot publishes its diagnostics through Flymake. Running external
+linters again after every idle change is redundant and competes with
+the LSP server, so only lint on save.
+#+begin_src elisp
+  (use-package flycheck
+    :ensure t
+    :init
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    :hook (after-init-hook . global-flycheck-mode))
 #+end_src
 * Editor
 ** EditorConfig (=editorconfig=)

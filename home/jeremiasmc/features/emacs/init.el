@@ -1,5 +1,10 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Read larger chunks from language servers (default is 64 KiB).
+(setq read-process-output-max (* 1024 1024))
+;; Avoid frequent full garbage collections while editing.
+(setq gc-cons-threshold (* 64 1024 1024))
+
 (let* ((var-dir (expand-file-name "var/" user-emacs-directory))
        (auto-save-dir (expand-file-name "auto-save/" var-dir))
        (lock-dir (expand-file-name "lock/" var-dir))
@@ -48,6 +53,49 @@
   )
 (use-package all-the-icons
   :ensure t)
+
+(use-package eglot
+  :ensure t
+  :custom
+  ;; Let edits settle before notifying the server. This coalesces bursts
+  ;; of typing into fewer didChange messages.
+  (eglot-send-changes-idle-time 1.0)
+  ;; Don't freeze the UI while the server starts up.
+  (eglot-sync-connect nil)
+  ;; Free server resources when the last buffer using it is closed.
+  (eglot-autoshutdown t)
+  ;; The event log is only useful for debugging; keeping every message
+  ;; around costs memory and CPU.
+  (eglot-events-buffer-config '(:size 0 :format full)))
+
+(use-package corfu
+  :ensure t
+  :init
+  (setq corfu-auto t
+        corfu-auto-prefix 3
+        corfu-auto-delay 0.3)
+  (global-corfu-mode 1))
+
+(setq completion-preview-idle-delay 0.5)
+
+(use-package cape
+  :ensure t
+  :init
+  ;; `cape-dabbrev' scans buffer text and can be expensive, so keep it
+  ;; for prose buffers.
+  (add-hook 'text-mode-hook
+            (lambda ()
+              (add-hook 'completion-at-point-functions #'cape-dabbrev nil t)))
+  ;; File-name completion is cheap and useful in programming buffers.
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (add-hook 'completion-at-point-functions #'cape-file nil t))))
+
+(use-package flycheck
+  :ensure t
+  :init
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  :hook (after-init-hook . global-flycheck-mode))
 
 (editorconfig-mode 1)
 
