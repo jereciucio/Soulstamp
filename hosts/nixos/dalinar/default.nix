@@ -11,6 +11,7 @@
     ../common/optional/gnome.nix
     ../common/optional/wireless.nix
     ../common/optional/kanata
+    ../common/optional/laptop.nix
   ];
 
   networking = {
