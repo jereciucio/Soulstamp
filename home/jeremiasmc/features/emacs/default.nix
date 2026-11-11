@@ -17,6 +17,10 @@
     extraConfig = builtins.readFile ./init.el;
   };
 
+  services.emacs = {
+    enable = true;
+  };
+
   home.sessionVariables = {
     EDITOR = "emacs";
   };
