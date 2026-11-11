@@ -31,6 +31,14 @@ This means that I don't have any Emacs package manager declared in my
 config, so be aware it probably won't work out of the box if it is
 imported outside of Nix.
 
+* Lexical binding
+Emacs Lisp is dynamically scoped by default for backwards compatibility.
+Lexical scoping is faster, catches more mistakes at compile time, and
+makes closures work as expected, so enable it for the generated file.
+#+begin_src elisp
+  ;; -*- lexical-binding: t; -*-
+#+end_src
+
 * Completion
 ** Completion Engine (=vertico=)
 Vertico provides a much more complete completion system than the
