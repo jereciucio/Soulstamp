@@ -31,11 +31,6 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-
-      # Temp fix as there's packages that still use gtk2
-      problems.handlers = {
-        "gtk+".broken = "warn";
-      };
     };
     overlays = [
       inputs.emacs-overlay.overlays.default
