@@ -1,5 +1,22 @@
 ;; -*- lexical-binding: t; -*-
 
+(let* ((var-dir (expand-file-name "var/" user-emacs-directory))
+       (auto-save-dir (expand-file-name "auto-save/" var-dir))
+       (lock-dir (expand-file-name "lock/" var-dir))
+       (backup-dir (expand-file-name "backup/" var-dir)))
+  ;; These have to exist before Emacs tries to write to them.
+  (dolist (dir (list auto-save-dir lock-dir backup-dir))
+    (make-directory dir t))
+  (setq auto-save-file-name-transforms
+        `((".*" ,auto-save-dir t))
+        lock-file-name-transforms
+        `((".*" ,lock-dir t))
+        backup-directory-alist
+        `(("." . ,backup-dir)))
+  ;; Lock files are only useful between sessions on the same machine;
+  ;; on remote files they mostly get in the way.
+  (setq remote-file-name-inhibit-locks t))
+
 (use-package vertico
   :ensure t
   :init

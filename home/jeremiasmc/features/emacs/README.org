@@ -39,6 +39,36 @@ makes closures work as expected, so enable it for the generated file.
   ;; -*- lexical-binding: t; -*-
 #+end_src
 
+* Keeping the filesystem tidy
+By default, Emacs writes auto-save files (=#file#=), lock files (=.#file=)
+and backups (=file~=) right next to the files we edit. This clutters
+source trees, gets picked up by fuzzy finders, and occasionally ends up
+committed by accident.
+
+We redirect all of them to a single =var/= directory inside
+=user-emacs-directory= instead. For auto-save and lock files, the =t=
+(=UNIQUIFY=) below makes Emacs mirror the original path into the file
+name using =!= instead of =/=, so files with the same basename in
+different directories don't collide.
+#+begin_src elisp
+  (let* ((var-dir (expand-file-name "var/" user-emacs-directory))
+         (auto-save-dir (expand-file-name "auto-save/" var-dir))
+         (lock-dir (expand-file-name "lock/" var-dir))
+         (backup-dir (expand-file-name "backup/" var-dir)))
+    ;; These have to exist before Emacs tries to write to them.
+    (dolist (dir (list auto-save-dir lock-dir backup-dir))
+      (make-directory dir t))
+    (setq auto-save-file-name-transforms
+          `((".*" ,auto-save-dir t))
+          lock-file-name-transforms
+          `((".*" ,lock-dir t))
+          backup-directory-alist
+          `(("." . ,backup-dir)))
+    ;; Lock files are only useful between sessions on the same machine;
+    ;; on remote files they mostly get in the way.
+    (setq remote-file-name-inhibit-locks t))
+#+end_src
+
 * Completion
 ** Completion Engine (=vertico=)
 Vertico provides a much more complete completion system than the
