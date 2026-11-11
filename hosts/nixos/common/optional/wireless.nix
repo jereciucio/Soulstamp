@@ -1,4 +1,4 @@
-{lib, ...}: {
+{lib, pkgs, ...}: {
   networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;
@@ -13,4 +13,8 @@
       "/var/lib/NetworkManager"
     ];
   };
+
+  environment.systemPackages = [
+    pkgs.net-tools
+  ];
 }
