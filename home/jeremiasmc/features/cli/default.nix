@@ -15,5 +15,7 @@
     nh # Wrapper for NixOS commands
     ripgrep # Faster grep
     fd # Faster find
+    zip # Create zip files
+    unzip # Extract zip files
   ];
 }
