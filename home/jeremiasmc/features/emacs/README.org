@@ -402,7 +402,15 @@ all org files with the option =#+auto_tangle: t= set (like this one).
     :ensure t
     :hook (org-mode . org-auto-tangle-mode))
 #+end_src
+*** Exporting
+Load the =citeproc= package so bibliography exports can use the =csl=
+format for styling citations
+#+begin_src elisp
+  (use-package citeproc
+    :ensure t
+    )
 
+#+end_src
 ** Nix
 We'll add modes for common files on my Nix config
 #+begin_src elisp

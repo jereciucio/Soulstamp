@@ -29,5 +29,7 @@
   home.packages = [
     pkgs.emacs-all-the-icons-fonts # Required by the Emacs config
     pkgs.nerd-fonts.jetbrains-mono
+
+    pkgs.haskellPackages.citeproc
   ];
 }
