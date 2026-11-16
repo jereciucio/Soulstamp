@@ -12,13 +12,13 @@
     ../common/optional/wireless.nix
     ../common/optional/kanata
     ../common/optional/laptop.nix
+    ../common/optional/printers.nix
   ];
 
   networking = {
     hostName = "dalinar";
   };
   powerManagement.powertop.enable = true;
-  services.printing.enable = true;
   services.thermald.enable = true;
   system.stateVersion = "26.05";
 }
