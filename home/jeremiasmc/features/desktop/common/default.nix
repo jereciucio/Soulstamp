@@ -11,6 +11,7 @@
     #./brave-origin.nix
     ./office.nix
     ./inkscape.nix
+    ./anydesk.nix
   ];
 
   home.persistence = {
