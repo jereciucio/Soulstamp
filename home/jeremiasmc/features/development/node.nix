@@ -5,5 +5,6 @@
     jq
     typescript-language-server
     eslint
+    postman
   ];
 }
