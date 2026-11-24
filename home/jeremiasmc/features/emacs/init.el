@@ -213,6 +213,13 @@
 (use-package haskell-mode
   :ensure t)
 
+(use-package rust-mode
+  :ensure t
+  :hook
+  (rust-mode . eglot-ensure)
+  (rust-mode . completion-preview-mode)
+  (rust-mode . subword-mode))
+
 ;; `js-mode' is built in, so plain hooks are simpler here.  (Using
 ;; `use-package' with :ensure nil made it generate bogus autoloads that
 ;; pointed at a non-existent "js-mode" library.)

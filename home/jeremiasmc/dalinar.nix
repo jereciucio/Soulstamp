@@ -7,6 +7,8 @@
     ./features/gaming/nethack.nix
     ./features/gaming/go.nix
     ./features/development/node.nix
+    ./features/development/rust.nix
+    ./features/development/vms.nix
     ./features/design
     ./features/desktop/common/mision-control.nix
   ];
